@@ -16,29 +16,56 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `SeriesAnimadas`
+-- Table structure for table `series_animadas`
 --
 
-DROP TABLE IF EXISTS `SeriesAnimadas`;
+DROP TABLE IF EXISTS `series_animadas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `SeriesAnimadas` (
-  `Nombre` varchar(100) NOT NULL,
-  `Descripcion` varchar(100) NOT NULL,
-  `Generos` int(11) NOT NULL,
-  `year` int(11) NOT NULL,
-  `Tipo` int(11) NOT NULL,
-  `Emision` tinyint(1) NOT NULL
+CREATE TABLE `series_animadas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `product_type` varchar(255) DEFAULT NULL,
+  `status` bit(1) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `type` tinyblob DEFAULT NULL,
+  `year` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `SeriesAnimadas`
+-- Dumping data for table `series_animadas`
 --
 
-LOCK TABLES `SeriesAnimadas` WRITE;
-/*!40000 ALTER TABLE `SeriesAnimadas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `SeriesAnimadas` ENABLE KEYS */;
+LOCK TABLES `series_animadas` WRITE;
+/*!40000 ALTER TABLE `series_animadas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `series_animadas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Stalin',NULL),(2,'Stalin',NULL),(3,'Stalin',NULL),(4,'lenin','$2a$10$.jVGE./aUVsu/q3X./l3C.q1QpY.cFRHXb.HoEEqSDnJT6Tc.QAzK');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -54,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-10  1:40:21
+-- Dump completed on 2019-11-03 12:24:42
