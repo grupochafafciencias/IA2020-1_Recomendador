@@ -83,6 +83,9 @@ public class User implements Serializable {
 
     @Override
     public String toString(){
-        return String.format("User[id=%d, name='%s']",id,name);
+        for (UserSeries userSeries:watched) {
+            System.out.println(userSeries);
+        }
+        return (name+" , "+id+" , ");
     }
 }

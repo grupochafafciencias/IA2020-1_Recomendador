@@ -1,16 +1,18 @@
 package com.example.recomendador.models;
 
-public class UserSeries {
+import java.io.Serializable;
+
+public class UserSeries implements Serializable {
     private Series series;
-    private int rating;
+    private Double rating;
     public UserSeries(){
     }
-    public UserSeries(Series series,int rating){
+    public UserSeries(Series series,Double rating){
         this.series=series;
         this.rating=rating;
     }
 
-    public int getRating() {
+    public Double getRating() {
         return rating;
     }
 
@@ -18,11 +20,16 @@ public class UserSeries {
         return series;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
     public void setSeries(Series series) {
         this.series = series;
+    }
+
+    @Override
+    public String toString() {
+        return (series+" , "+rating);
     }
 }

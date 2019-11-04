@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class WebController {
@@ -60,10 +61,18 @@ public class WebController {
     public String welcome(Model model){
         List<Series> ser=seriesService.findAll();
         List<User> usr= userService.findAll();
-        SlopeOne.slopeOne(usr,ser);
-        model.addAttribute("usuario",userValidator.getUser());
+        Set<User> predictions=SlopeOne.slopeOne(usr,ser);
+        User loged=userValidator.getUser();
+        for(User user: predictions){
+            userService.save(user);
+            if(user.getId()==loged.getId()) {
+                model.addAttribute("usuario",user);
+                model.addAttribute("series",ser);
+                return "welcome";
+            }
+        }
+        model.addAttribute("usuario",loged);
         model.addAttribute("series",ser);
         return "welcome";
     }
-
 }

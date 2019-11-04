@@ -105,4 +105,8 @@ public class Series  implements Serializable {
         this.year = year;
     }
 
+    @Override
+    public String toString() {
+        return (title+ " , "+id+" , "+image);
+    }
 }

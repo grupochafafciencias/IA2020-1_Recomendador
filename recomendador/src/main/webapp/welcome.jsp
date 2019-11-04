@@ -35,7 +35,8 @@
             <h3 class="text-white">
                 Recommended for you
                 <c:forEach items="${usuario.getWatched()}" var="serie">
-                    <p></p>
+                    <p><img src="${ContextPath}${serie.getSeries().getImage()}" href=height="165" width="117"></p>
+                    <p>F(x)=${ContextPath}${serie.getRating()}</p>
                 </c:forEach>
             </h3>
             <h3 class="text-white">

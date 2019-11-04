@@ -2,6 +2,7 @@ package com.example.recomendador.controls;
 
 import com.example.recomendador.models.Series;
 import com.example.recomendador.models.User;
+import com.example.recomendador.models.UserSeries;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class SlopeOne {
 
@@ -17,21 +19,14 @@ public class SlopeOne {
     private static Map<User, HashMap<Series, Double>> inputData;
     private static Map<User, HashMap<Series, Double>> outputData = new HashMap<>();
 
-    public static void slopeOne(List<User> numberOfUsers, List<Series> series) {
+    public static Set<User> slopeOne(List<User> numberOfUsers, List<Series> series) {
         inputData = InputData.initializeData(numberOfUsers,series);
         System.out.println("Slope One - Before the Prediction\n");
         buildDifferencesMatrix(inputData);
         System.out.println("\nSlope One - With Predictions\n");
-        predict(inputData);
+        return predict(inputData);
     }
 
-    /**
-     * Based on the available data, calculate the relationships between the
-     * items and number of occurences
-     *
-     * @param data
-     *            existing user data and their items' ratings
-     */
     private static void buildDifferencesMatrix(Map<User, HashMap<Series, Double>> data) {
         for (HashMap<Series, Double> user : data.values()) {
             for (Entry<Series, Double> e : user.entrySet()) {
@@ -61,17 +56,9 @@ public class SlopeOne {
                 diff.get(j).put(i, oldValue / count);
             }
         }
-        printData(data);
     }
 
-    /**
-     * Based on existing data predict all missing ratings. If prediction is not
-     * possible, the value will be equal to -1
-     *
-     * @param data
-     *            existing user data and their items' ratings
-     */
-    private static void predict(Map<User, HashMap<Series, Double>> data) {
+    private static Set<User> predict(Map<User, HashMap<Series, Double>> data) {
         HashMap<Series, Double> uPred = new HashMap<Series, Double>();
         HashMap<Series, Integer> uFreq = new HashMap<Series, Integer>();
         for (Series j : diff.keySet()) {
@@ -105,22 +92,26 @@ public class SlopeOne {
             }
             outputData.put(e.getKey(), clean);
         }
-        printData(outputData);
+        return printData(outputData);
     }
 
-    private static void printData(Map<User, HashMap<Series, Double>> data) {
-        for (User user : data.keySet()) {
+    private static Set<User> printData(Map<User, HashMap<Series, Double>> data) {
+        Set<User> foo=data.keySet();
+        for (User user : foo) {
             System.out.println(user.getUsername() + ":");
-            print(data.get(user));
+            HashMap<Series,Double> hashMap=data.get(user);
+            NumberFormat formatter = new DecimalFormat("#0.000");
+            int len=hashMap.keySet().size();
+            UserSeries[] userSeries=new UserSeries[len];
+            int counter=0;
+            for (Series j : hashMap.keySet()) {
+                System.out.println(" " + j.getTitle() + " --> " + formatter.format(hashMap.get(j).doubleValue()));
+                userSeries[counter]=new UserSeries(j,hashMap.get(j));
+                counter++;
+            }
+            user.setWatched(userSeries);
         }
+        return foo;
     }
-
-    private static void print(HashMap<Series, Double> hashMap) {
-        NumberFormat formatter = new DecimalFormat("#0.000");
-        for (Series j : hashMap.keySet()) {
-            System.out.println(" " + j.getTitle() + " --> " + formatter.format(hashMap.get(j).doubleValue()));
-        }
-    }
-
 }
 
