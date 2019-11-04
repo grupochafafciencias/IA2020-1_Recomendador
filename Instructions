@@ -1,0 +1,4 @@
+>Se corrio usando mariadb 10.3.17-MariaDB-0+deb10u1, en Debian 10
+>Se uso una version de IntelliJ IDEA para hacer el proyecto.
+>Una vez en este, se ejecuta la clase RecomendadorApplication (recomendador/src/main/java/com.example.recomendador/RecomendadorApplication)
+>Por defecto corre en el puerto 8080. Se usa su navegador para entrar en este.

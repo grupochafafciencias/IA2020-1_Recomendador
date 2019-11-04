@@ -30,8 +30,9 @@ CREATE TABLE `series_animadas` (
   `title` varchar(255) DEFAULT NULL,
   `type` tinyblob DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +41,7 @@ CREATE TABLE `series_animadas` (
 
 LOCK TABLES `series_animadas` WRITE;
 /*!40000 ALTER TABLE `series_animadas` DISABLE KEYS */;
+INSERT INTO `series_animadas` VALUES (1,'Los matare a todos','Porno','\0','ww3','¬í\0ur\0[Ljava.lang.String;­ÒVçé{G\0\0xp\0\0\0t\0foot\0bart\0satan',1945,'/resources/images/imagen/girls-panzer-kore-ga-hontou-no-anzio-sen-desu.jpg');
 /*!40000 ALTER TABLE `series_animadas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,8 +56,9 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `watched` tinyblob DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +67,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Stalin',NULL),(2,'Stalin',NULL),(3,'Stalin',NULL),(4,'lenin','$2a$10$.jVGE./aUVsu/q3X./l3C.q1QpY.cFRHXb.HoEEqSDnJT6Tc.QAzK');
+INSERT INTO `user` VALUES (9,'matame','$2a$10$vutp5Kd5TqgzrA.rq0FKYOrnw5jf2CBRyBFSqvVNW.tChniVMcB.G','¬í\0ur\0-[Lcom.example.recomendador.models.UserSeries;Ã]µ±£/0\0\0xp\0\0\0\0');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-03 12:24:42
+-- Dump completed on 2019-11-03 21:12:44

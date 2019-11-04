@@ -1,7 +1,9 @@
 package com.example.recomendador.controls;
 
+import com.example.recomendador.models.Series;
 import com.example.recomendador.models.User;
 import com.example.recomendador.service.SecurityService;
+import com.example.recomendador.service.SeriesService;
 import com.example.recomendador.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +12,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Controller
 public class WebController {
     @Autowired
     UserService userService;
+    @Autowired
+    SeriesService seriesService;
     @Autowired
     private SecurityService securityService;
     @Autowired
@@ -38,14 +43,26 @@ public class WebController {
     }
     @GetMapping("/login")
     public String login(Model model,String error, String logout){
-        if(error!=null)
+        if(error!=null) {
             model.addAttribute("error", "Tu existencia es invalida >:(.");
+        }
         if(logout!=null)
             model.addAttribute("message","Ya, largate si eso es lo que quieres");
         return "login";
     }
+
+    @GetMapping("/watch")
+    public String watch(Model model){
+        return "watch";
+    }
+
     @GetMapping({"/","/welcome"})
     public String welcome(Model model){
+        List<Series> ser=seriesService.findAll();
+        List<User> usr= userService.findAll();
+        SlopeOne.slopeOne(usr,ser);
+        model.addAttribute("usuario",userValidator.getUser());
+        model.addAttribute("series",ser);
         return "welcome";
     }
 

@@ -23,20 +23,31 @@ public class Series  implements Serializable {
 
    @Column(name = "productType")
     private String productType;
+   @Column(name="image")
+   private String image;
 
    @Column(name = "status")
     private Boolean status;
 
    public Series(){
    }
-   public Series(String title, String description,String[] type,Integer year,String productType,Boolean status){
+   public Series(String title, String description,String[] type,Integer year,String productType,String image,Boolean status){
        this.title=title;
        this.description=description;
        this.type=type;
        this.year=year;
+       this.image=image;
        this.productType=productType;
        this.status=status;
    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public Integer getId() {
         return id;

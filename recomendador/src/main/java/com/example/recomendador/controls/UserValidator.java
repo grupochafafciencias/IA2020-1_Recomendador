@@ -16,9 +16,15 @@ public class UserValidator implements Validator {
         return User.class.equals(aC);
     }
 
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
     @Override
     public void validate(Object o, Errors errors) {
-        User user=(User) o;
+        user=(User) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"username","NotEmpty");
         if(user.getName().length()<5 || user.getName().length()>19){
             errors.rejectValue("username","Size.userForm.username");
