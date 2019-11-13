@@ -34,25 +34,26 @@ public class SlopeOne {
                     diff.put(e.getKey(), new HashMap<Series, Double>());
                     freq.put(e.getKey(), new HashMap<Series, Integer>());
                 }
-                for (Entry<Series, Double> e2 : user.entrySet()) {
+                for (User usr : data.keySet()) {
+                    for(UserSeries e2: usr.getWatched()){
                     int oldCount = 0;
-                    if (freq.get(e.getKey()).containsKey(e2.getKey())) {
-                        oldCount = freq.get(e.getKey()).get(e2.getKey()).intValue();
+                    if (freq.get(e.getKey()).containsKey(e2.getSeries())) {
+                        oldCount = freq.get(e.getKey()).get(e2.getSeries());
                     }
                     double oldDiff = 0.0;
-                    if (diff.get(e.getKey()).containsKey(e2.getKey())) {
-                        oldDiff = diff.get(e.getKey()).get(e2.getKey()).doubleValue();
+                    if (diff.get(e.getKey()).containsKey(e2.getSeries())) {
+                        oldDiff = diff.get(e.getKey()).get(e2.getSeries());
                     }
-                    double observedDiff = e.getValue() - e2.getValue();
-                    freq.get(e.getKey()).put(e2.getKey(), oldCount + 1);
-                    diff.get(e.getKey()).put(e2.getKey(), oldDiff + observedDiff);
+                    double observedDiff = e.getValue() - e2.getRating();
+                    freq.get(e.getKey()).put(e2.getSeries(), oldCount + 1);
+                    diff.get(e.getKey()).put(e2.getSeries(), oldDiff + observedDiff);}
                 }
             }
         }
         for (Series j : diff.keySet()) {
             for (Series i : diff.get(j).keySet()) {
-                double oldValue = diff.get(j).get(i).doubleValue();
-                int count = freq.get(j).get(i).intValue();
+                double oldValue = diff.get(j).get(i);
+                int count = freq.get(j).get(i);
                 diff.get(j).put(i, oldValue / count);
             }
         }
@@ -69,27 +70,23 @@ public class SlopeOne {
             for (Series j : e.getValue().keySet()) {
                 for (Series k : diff.keySet()) {
                     try {
-                        double predictedValue = diff.get(k).get(j).doubleValue() + e.getValue().get(j).doubleValue();
-                        double finalValue = predictedValue * freq.get(k).get(j).intValue();
+                        double predictedValue = diff.get(k).get(j) + e.getValue().get(j);
+                        double finalValue = predictedValue * freq.get(k).get(j);
                         uPred.put(k, uPred.get(k) + finalValue);
-                        uFreq.put(k, uFreq.get(k) + freq.get(k).get(j).intValue());
+                        uFreq.put(k, uFreq.get(k) + freq.get(k).get(j));
                     } catch (NullPointerException e1) {
                     }
                 }
             }
+            System.out.println(uFreq);
+            System.out.println(uPred);
             HashMap<Series, Double> clean = new HashMap<Series, Double>();
             for (Series j : uPred.keySet()) {
                 if (uFreq.get(j) > 0) {
-                    clean.put(j, uPred.get(j).doubleValue() / uFreq.get(j).intValue());
+                    clean.put(j, uPred.get(j)/ uFreq.get(j));
                 }
             }
-            for (Series j : InputData.items) {
-                if (e.getValue().containsKey(j)) {
-                    clean.put(j, e.getValue().get(j));
-                } else {
-                    clean.put(j, -1.0);
-                }
-            }
+            System.out.println(clean);
             outputData.put(e.getKey(), clean);
         }
         return printData(outputData);

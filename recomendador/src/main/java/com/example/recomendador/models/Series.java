@@ -109,4 +109,14 @@ public class Series  implements Serializable {
     public String toString() {
         return (title+ " , "+id+" , "+image);
     }
+    @Override
+    public boolean equals(Object o){
+        if(o==null || o.getClass()!=getClass()) return false;
+        final Series series=(Series) o;
+        return (series.getId().equals(this.id));
+    }
+    @Override
+    public int hashCode(){
+       return this.id;
+    }
 }

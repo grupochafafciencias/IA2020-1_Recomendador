@@ -31,11 +31,12 @@
 <div class="view" style="background-image: url('http://s1.picswalls.com/wallpapers/2015/12/12/halloween-2015-hd-wallpaper_015511727_296.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="mask rgba-gradient align-items-center">
         <div class="container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/yjavYXmIvxI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h3 class="text-white">
                 Recommended for you
                 <c:forEach items="${usuario.getWatched()}" var="serie">
                     <p><img src="${ContextPath}${serie.getSeries().getImage()}" href=height="165" width="117"></p>
+                    <p>${serie.getSeries().getId()}</p>
+                    <p>${serie.getSeries().getTitle()}</p>
                     <p>F(x)=${ContextPath}${serie.getRating()}</p>
                 </c:forEach>
             </h3>
@@ -43,6 +44,8 @@
                 General
                 <c:forEach items="${series}" var="serie">
                     <p><img src="${ContextPath}${serie.getImage()}" href=height="165" width="117"></p>
+                    <p>${serie.getId()}</p>
+                    <p>${serie.getTitle()}</p>
                 </c:forEach>
             </h3>
         </div>

@@ -11,15 +11,15 @@ public class InputData {
         items=series;
         Map<User, HashMap<Series, Double>> data = new HashMap<>();
         HashMap<Series, Double> newUser;
-        Set<Series> newRecommendationSet;
+        Set<UserSeries> newRecommendationSet;
         for (User e:users) {
             newUser = new HashMap<Series, Double>();
             newRecommendationSet = new HashSet<>();
             for (UserSeries vista:e.getWatched()) {
-                newRecommendationSet.add(vista.getSeries());
+                newRecommendationSet.add(vista);
             }
-            for (Series item : newRecommendationSet) {
-                newUser.put(item, Math.random());
+            for (UserSeries item : newRecommendationSet) {
+                newUser.put(item.getSeries(),item.getRating());
             }
             data.put(e,newUser);
         }

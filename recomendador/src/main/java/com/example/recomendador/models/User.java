@@ -34,7 +34,11 @@ public class User implements Serializable {
         this.name= name;
         this.watched=new UserSeries[0];
     }
-
+    public User(String name,String password,UserSeries[] watched){
+        this.setWatched(watched);
+        this.setPassword(password);
+        this.setName(name);
+    }
     public Integer getId(){
         return id;
     }

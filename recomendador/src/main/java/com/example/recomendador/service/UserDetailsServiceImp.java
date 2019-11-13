@@ -17,7 +17,6 @@ import java.util.Set;
 public class UserDetailsServiceImp implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
-
     @Override
     @Transactional(readOnly=true)
     public UserDetails loadUserByUsername(String username){
